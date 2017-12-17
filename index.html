@@ -6,92 +6,61 @@
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
   <script src='https://api.mapbox.com/mapbox-gl-js/v0.42.1/mapbox-gl.js'></script>
   <link href='https://api.mapbox.com/mapbox-gl-js/v0.42.1/mapbox-gl.css' rel='stylesheet' />
-  <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,800" rel="stylesheet">
   <style>
-    body {
-      margin: 0;
-      padding: 0;
+    body { margin: 0; padding: 0; }
+    h2, h3 {
+        margin: 10px;
+        font-size: 1.2em;
     }
-
+    h3 {
+        font-size: 1em;
+    }
+    p {
+        font-size: 0.85em;
+        margin: 10px;
+        text-align: left;
+    }
+    .map-overlay {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.8);
+        margin-right: 20px;
+        font-family: Arial, sans-serif;
+        overflow: auto;
+        border-radius: 3px;
+        }
     #map {
       position: absolute;
       top: 0;
       bottom: 0;
       width: 100%;
     }
+    #features {
+        top: 0;
+        height: 100px;
+        margin-top: 20px;
+        width: 250px;
+    }
   </style>
 </head>
 <body>
 
-  <style>
-    body {
-      overflow: hidden;
-    }
-
-    body * {
-      font-family: 'Work Sans', sans-serif;
-      -webkit-touch-callout: none;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
-
-    svg {
-      overflow: visible;
-    }
-
-    h1 {
-      font-weight: bold;
-      line-height: 30px;
-    }
-
-    ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-
-    .map {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 100%;
-    }
-
-
-    #blurb {
-      color: white;
-      font-size: 15px;
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      width: 40%;
-      z-index: 1;
-    }
-
-  </style>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/4.11.0/d3.js'></script>
-  <script src='https://api.mapbox.com/mapbox-gl-js/v0.42.1/mapbox-gl.js'></script>
-  <link href='https://api.mapbox.com/mapbox-gl-js/v0.42.1/mapbox-gl.css' rel='stylesheet' />
-  <div id='map' class='map'>
-    <div id='blurb'>
-      <h1>Mapbox Community Days 2017</h1>
-      <p>Where we volunteered in our local communities this year.</p>
-    </div>
-  </div>
+  <div id='map'</div>
+  <div class='map-overlay' id='features'><h2>Mapbox Community Days 2017</h2><div id='pd'><p>Where we volunteered in our local communities this year.</p></div></div>
 
 <script>
-    // define access token
-    mapboxgl.accessToken = 'pk.eyJ1IjoibWFyZW5hYiIsImEiOiJjajV2ajVyZXUwMnN3MzNwNzR3Ynk2cjIyIn0.sI-ynx23EEdpZFbEDu6qjA';
-    // create map
-    var map = new mapboxgl.Map({
-      container: 'map',
-      style: 'mapbox://styles/marenab/cjbbbbt2q5xxk2rmvuezjgzhl'
+// define access token
+mapboxgl.accessToken = 'pk.eyJ1IjoibWFyZW5hYiIsImEiOiJjajV2ajVyZXUwMnN3MzNwNzR3Ynk2cjIyIn0.sI-ynx23EEdpZFbEDu6qjA';
+
+// create map
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/marenab/cjbbbbt2q5xxk2rmvuezjgzhl'
     });
     
-    //wait for map to load before adjusting it
-    map.on('load', function() {
+//wait for map to load before adjusting it
+map.on('load', function() {
 
     // make a pointer cursor
     map.getCanvas().style.cursor = 'default';
