@@ -73,7 +73,7 @@ var map = new mapboxgl.Map({
   
 map.on('click', function(e) {
   var features = map.queryRenderedFeatures(e.point, {
-    layers: ['{volunteer-locations}'] // replace this with the name of the layer
+    layers: ['volunteer-locations'] // replace this with the name of the layer
   });
 
   if (!features.length) {
@@ -84,7 +84,7 @@ map.on('click', function(e) {
 
   var popup = new mapboxgl.Popup({ offset: [0, -15] })
     .setLngLat(feature.geometry.coordinates)
-    .setHTML('<h3>' + feature.properties.organization + '</h3><p>' + feature.properties.description + '</p>')
+    .setHTML('<h3>' + feature.properties.Organization + '</h3><p>' + feature.properties.Description + '</p>')
     .setLngLat(feature.geometry.coordinates)
     .addTo(map);
 });
