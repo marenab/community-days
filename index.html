@@ -21,6 +21,12 @@
             margin: 10px;
             text-align: left;
         }
+        #pd {
+          z-index: 999;
+          position: absolute;
+          background-color: "#fff";
+          width: 100%;
+        }
         .map-overlay {
             position: absolute;
             bottom: 0;
@@ -64,8 +70,11 @@
 
 <body>
 
-<div id='map'</div>
-<div class='map-overlay' id='features'><h2>US population density</h2><div id='pd'><p>Hover over a state!</p></div></div>
+<div id='pd'>
+  <h2>Mapbox Community Days 2017</h2>
+  <p>Click on a heart to see where we volunteered!</p>
+</div>
+<div id='map'></div>
 
 <script>
 // define access token
