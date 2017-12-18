@@ -37,6 +37,14 @@
             bottom:0;
             width:100%;
         }
+        .marker {
+            background-image: url('heart-15.svg');
+            background-size: cover;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
         #features {
             top: 0;
             height: 100px;
@@ -87,7 +95,19 @@ map.on('click', function(e) {
   var url = 'https://github.com/marenab/community-days/blob/master/Community-days-17.geojson';
   map.addSource('source_id', { type: 'geojson', data: url});
 });
-    
+  
+// add markers to map
+geojson.features.forEach(function(marker) {
+
+  // create a HTML element for each feature
+  var el = document.createElement('div');
+  el.className = 'marker';
+
+  // make a marker for each feature and add to the map
+  new mapboxgl.Marker(el)
+  .setLngLat(marker.geometry.coordinates)
+  .addTo(map);
+});    
 </script>
 </body>
 </html>
