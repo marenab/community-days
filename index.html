@@ -45,6 +45,14 @@
             border-radius: 50%;
             cursor: pointer;
         }
+        .mapboxgl-popup {
+            max-width: 200px;
+        }
+
+        .mapboxgl-popup-content {
+            text-align: center;
+            font-family: 'Open Sans', sans-serif;
+        }
         #features {
             top: 0;
             height: 100px;
@@ -75,30 +83,9 @@ var map = new mapboxgl.Map({
     style: 'mapbox://styles/marenab/cjbbbbt2q5xxk2rmvuezjgzhl'
 });
   
-map.on('click', function(e) {
-  var features = map.queryRenderedFeatures(e.point, {
-    layers: ['volunteer-locations'] // replace this with the name of the layer
-  });
-
-  if (!features.length) {
-    return;
-  }
-
-  var feature = features[0];
-
-  var popup = new mapboxgl.Popup({ offset: [0, -15] })
-    .setLngLat(feature.geometry.coordinates)
-    .setHTML('<h3>' + feature.properties.Organization + '</h3><p>' + feature.properties.Description + '</p>')
-    .setLngLat(feature.geometry.coordinates)
-    .addTo(map);
-  
-  var url = 'https://github.com/marenab/community-days/blob/master/Community-days-17.geojson';
-  map.addSource('source_id', { type: 'geojson', data: url});
-});
-  
-  var geojson = {
-    type: 'FeatureCollection',
-    features: [
+var geojson = {
+  type: 'FeatureCollection',
+  features: [
 { "type": "Feature", "properties": { "Organization": "Food and Friends", "Address": "219 Riggs Rd NE, Washington, DC 20011", "Lat": 38.9556969, "Long": -77.0021788, "Description": "We prepared and packaged food for people with HIV\/AIDS, cancer, and other serious illnesses that limit their ability to provide nourishment for themselves", "Photo": null, "Website": "https:\/\/www.foodandfriends.org\/" }, "geometry": { "type": "Point", "coordinates": [ -77.0021788, 38.9556969 ] } },
 { "type": "Feature", "properties": { "Organization": "Family House", "Address": "540 Mission Bay Blvd. North, San Francisco, CA 94158", "Lat": 37.771237, "Long": -122.3898424, "Description": "We prepared and served breakfast to families with sick kids in town for treatment and spent time with the families and helped around the House.", "Photo": null, "Website": "http:\/\/familyhouseinc.org\/" }, "geometry": { "type": "Point", "coordinates": [ -122.3898424, 37.771237 ] } },
 { "type": "Feature", "properties": { "Organization": "Groceries for Seniors", "Address": "660 California Street, San Francisco", "Lat": 37.7928207, "Long": -122.4057572, "Description": "We packed groceries from the SF Food Bank to be delivered to low-income seniors.", "Photo": null, "Website": "http:\/\/www.groceriesforseniors.org\/" }, "geometry": { "type": "Point", "coordinates": [ -122.4057572, 37.7928207 ] } },
@@ -128,7 +115,20 @@ map.on('click', function(e) {
 { "type": "Feature", "properties": { "Organization": "The Rebuilding Center", "Address": "3625 N Mississippi Ave, Portland, OR 97227", "Lat": 45.5489469, "Long": -122.6759183, "Description": "We helped sort and prepare dnoated building materials.", "Photo": null, "Website": "http:\/\/www.rebuildingcenter.org\/" }, "geometry": { "type": "Point", "coordinates": [ -122.6759183, 45.5489469 ] } }
 ]
 };
-    
+// add markers to map
+geojson.features.forEach(function(marker) {
+
+  // create a HTML element for each feature
+  var el = document.createElement('div');
+  el.className = 'marker';
+
+  // make a marker for each feature and add to the map
+  new mapboxgl.Marker(el)
+  .setLngLat(marker.geometry.coordinates)
+  .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+  .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>'))
+  .addTo(map);
+});    
 </script>
 </body>
 </html>
