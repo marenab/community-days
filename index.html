@@ -43,6 +43,10 @@
             margin-top: 20px;
             width: 250px;
         }
+        .mapboxgl-popup {
+        max-width: 400px;
+        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        }
     
   </style>
 </head>
@@ -65,6 +69,24 @@ mapboxgl.accessToken =
 var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/marenab/cjbbbbt2q5xxk2rmvuezjgzhl'
+});
+  
+map.on('click', function(e) {
+  var features = map.queryRenderedFeatures(e.point, {
+    layers: ['{volunteer-locations}'] // replace this with the name of the layer
+  });
+
+  if (!features.length) {
+    return;
+  }
+
+  var feature = features[0];
+
+  var popup = new mapboxgl.Popup({ offset: [0, -15] })
+    .setLngLat(feature.geometry.coordinates)
+    .setHTML('<h3>' + feature.properties.organization + '</h3><p>' + feature.properties.description + '</p>')
+    .setLngLat(feature.geometry.coordinates)
+    .addTo(map);
 });
     
 </script>
