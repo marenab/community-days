@@ -85,6 +85,7 @@ var map = new mapboxgl.Map({
 
 var geojson = {
   type: 'FeatureCollection',
+  crs: { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
   features: [
 { "type": "Feature", "properties": { "Organization": "Food and Friends", "Address": "219 Riggs Rd NE, Washington, DC 20011", "Lat": 38.9556969, "Long": -77.0021788, "Description": "We prepared and packaged food for people with HIV\/AIDS, cancer, and other serious illnesses that limit their ability to provide nourishment for themselves", "Photo": null, "Website": "https:\/\/www.foodandfriends.org\/" }, "geometry": { "type": "Point", "coordinates": [ -77.0021788, 38.9556969 ] } },
 { "type": "Feature", "properties": { "Organization": "Family House", "Address": "540 Mission Bay Blvd. North, San Francisco, CA 94158", "Lat": 37.771237, "Long": -122.3898424, "Description": "We prepared and served breakfast to families with sick kids in town for treatment and spent time with the families and helped around the House.", "Photo": null, "Website": "http:\/\/familyhouseinc.org\/" }, "geometry": { "type": "Point", "coordinates": [ -122.3898424, 37.771237 ] } },
