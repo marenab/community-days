@@ -126,7 +126,7 @@ geojson.features.forEach(function(marker) {
   new mapboxgl.Marker(el)
   .setLngLat(marker.geometry.coordinates)
   .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-  .setHTML('<h3>' + <a href="{marker.properties.Website}">{marker.properties.Organization}</a> + '</h3><p>' + marker.properties.Description + '</p>'))
+  .setHTML('<h3>' + marker.properties.Organization + '</h3><p>' + marker.properties.Description + '</p>'))
   .addTo(map);
 });    
 </script>
