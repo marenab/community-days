@@ -83,7 +83,9 @@ mapboxgl.accessToken =
 // create map
 var map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/marenab/cjbbbbt2q5xxk2rmvuezjgzhl'
+    style: 'mapbox://styles/marenab/cjbbbbt2q5xxk2rmvuezjgzhl',
+    center: [-8.266394, 39.906045],
+    zoom: 1.55
 });
 map.on('load', function() {
     // Add a new source from our GeoJSON data and set the
